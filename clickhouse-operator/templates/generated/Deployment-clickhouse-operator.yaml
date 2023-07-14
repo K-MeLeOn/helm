@@ -95,21 +95,25 @@ spec:
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
+                  divisor: '0'
                   resource: requests.cpu
             - name: OPERATOR_CONTAINER_CPU_LIMIT
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
+                  divisor: '0'
                   resource: limits.cpu
             - name: OPERATOR_CONTAINER_MEM_REQUEST
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
+                  divisor: '0'
                   resource: requests.memory
             - name: OPERATOR_CONTAINER_MEM_LIMIT
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
+                  divisor: '0'
                   resource: limits.memory
             {{ with .Values.operator.env }}{{ toYaml . | nindent 12 }}{{ end }}
           resources: {{ toYaml .Values.operator.resources | nindent 12 }}
@@ -161,21 +165,25 @@ spec:
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
+                  divisor: '0'
                   resource: requests.cpu
             - name: OPERATOR_CONTAINER_CPU_LIMIT
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
+                  divisor: '0'
                   resource: limits.cpu
             - name: OPERATOR_CONTAINER_MEM_REQUEST
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
+                  divisor: '0'
                   resource: requests.memory
             - name: OPERATOR_CONTAINER_MEM_LIMIT
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
+                  divisor: '0'
                   resource: limits.memory
             {{ with .Values.metrics.env }}{{ toYaml . | nindent 12 }}{{ end }}
           ports:
