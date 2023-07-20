@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.21.2
-    created: "2023-07-14T14:26:49.508980265+02:00"
+    created: "2023-07-20T16:47:39.134708273+02:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -18,4 +18,29 @@ entries:
     urls:
     - https://k-meleon.github.io/helm-charts/altinity-clickhouse-operator-0.21.2.tgz
     version: 0.21.2
-generated: "2023-07-14T14:26:49.506012643+02:00"
+  plausible-analytics:
+  - apiVersion: v2
+    appVersion: v2.0.0
+    created: "2023-07-20T16:47:39.13544463+02:00"
+    description: A Helm Chart for Plausible Analytics - a simple and privacy-friendly
+      alternative to Google Analytics
+    digest: c9baca9f02f7f36d54699d36828516b67103e39e1a103f8918b2f8f5355d54c3
+    home: https://plausible.io/
+    icon: https://docs.plausible.io/img/logo.svg
+    keywords:
+    - plausible analytics
+    - analytics
+    maintainers:
+    - name: Kameleon
+      url: https://nolimitcompany.fr
+    name: plausible-analytics
+    sources:
+    - https://github.com/8gears/plausible-analytics-helm-chart
+    - https://8gears.container-registry.com/harbor/projects/1/helm-charts/plausible-analytics/versions/0.2.2
+    - https://github.com/plausible/analytics
+    - https://github.com/k-meleon/helm-charts
+    type: application
+    urls:
+    - https://k-meleon.github.io/helm-charts/plausible-analytics-0.2.5.tgz
+    version: 0.2.5
+generated: "2023-07-20T16:47:39.131660987+02:00"
