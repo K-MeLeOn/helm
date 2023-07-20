@@ -1,25 +1,29 @@
+# /!\ WARNING /!\
+
+This chart was an updated fork of [this one](https://github.com/8gears/plausible-analytics-helm-chart).
+
+To manage Clickhouse I use [ClickHouse Operator](https://github.com/Altinity/clickhouse-operator/tree/master/deploy/helm) and to manage PostgreSQL I use [Cloud Native PG](https://github.com/cloudnative-pg/charts).
+I haven't include these software into this chart.
+
+From here, the README is mainly the same as his original author.
+
+
 # Plausible Analytics Helm Chart for Kubernetes
  
 [Plausible Analytics][] is a Simple, lightweight privacy-friendly website analytics  alternative to Google Analytics.
-
-[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/open-8gears)](https://artifacthub.io/packages/search?repo=open-8gears)
-
  
 
 ## Install Chart
 
 ```shell script
-helm repo add 8gears https://8gears.container-registry.com/chartrepo/library
+helm repo add k https://k-meleon.github.io/helm-charts
 helm repo update
 
 # Helm 3
 $ helm install [RELEASE_NAME] 8gears/plausible-analytics
 ```
  
-Source Code for this Helm Chart is located at: [8gears/plausible-analytics-helm-chart](https://github.com/8gears/plausible-analytics-helm-chart)
- 
-
-View Chart in 8gears Chart Museum: [8gears.container-registry.com/harbor/projects/1/helm-charts/plausible-analytics/versions/0.1.0](https://8gears.container-registry.com/harbor/projects/1/helm-charts/plausible-analytics/versions/0.1.0)
+Source Code for this Helm Chart is located at: [k/helm-charts](https://k-meleon.github.io/helm-charts)
 
 
 ## Requirements
