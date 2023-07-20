@@ -40,7 +40,6 @@ metrics:
 
     pullPolicy: IfNotPresent
   # metrics.resources -- custom resource configuration
-
   resources: {}
   #  limits:
 
