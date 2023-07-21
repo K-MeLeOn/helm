@@ -13,11 +13,8 @@ useExistingManifests: false # Use your Secret manifest, should be true with a gi
 #   ADMIN_USER_EMAIL
 #   ADMIN_USER_PWD
 #   
-#   Only if database.enable is true, clickhouse.enable must be false
-#     DATABASE_URL
-
-#   Only if clickhouse.enable is true, database.enable must be false
-#     CLICKHOUSE_DATABASE_URL
+#   DATABASE_URL
+#   CLICKHOUSE_DATABASE_URL
 #   
 #   SECRET_KEY_BASE
 # 
@@ -66,12 +63,10 @@ adminUser:
 
 # Not used if useExistingManifest is true.
 database: # Postgres Database
-  enabled: true
   url: # The URL to the Postgres Database Connection String see -> https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
 
 # Not used if useExistingManifest is true.
 clickhouse: # Clickhouse Database
-  enabled: true
   url: # The URL Connection String to clickhouse DB see -> https://clickhouse.tech/docs/en/interfaces/http/
 
 smtp: # Plausible uses and SMTP server to send transactional emails e.g. account activation, password reset, weekly reports, etc.

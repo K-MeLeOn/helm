@@ -146,7 +146,6 @@ spec:
                   key: GOOGLE_CLIENT_SECRET
                   name: {{ include "plausible-analytics.fullname" . }}
             {{- end }}
-            {{- if .Values.database.enabled }}
             {{- if .Values.database.url }}
             - name: DATABASE_URL
               valueFrom:
@@ -154,20 +153,17 @@ spec:
                   key: DATABASE_URL
                   name: {{ include "plausible-analytics.fullname" . }}
             {{- end }}
-            {{- end }}
             - name: SECRET_KEY_BASE
               valueFrom:
                 secretKeyRef:
                   key: SECRET_KEY_BASE
                   name: {{ include "plausible-analytics.fullname" . }}
-            {{- if .Values.clickhouse.enabled }}
             {{- if .Values.clickhouse.url }}
             - name: CLICKHOUSE_DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   key: CLICKHOUSE_DATABASE_URL
                   name: {{ include "plausible-analytics.fullname" . }}
-            {{- end }}
             {{- end }}
             {{- else}}
             - name: ADMIN_USER_EMAIL
@@ -185,20 +181,16 @@ spec:
                 secretKeyRef:
                   key: ADMIN_USER_PWD
                   name: {{ .Values.existingSecret }}
-            {{- if .Values.database.enabled }}
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   key: DATABASE_URL
                   name: {{ .Values.existingSecret }}
-            {{- end }}
-            {{- if .Values.clickhouse.enabled }}
             - name: CLICKHOUSE_DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   key: CLICKHOUSE_DATABASE_URL
                   name: {{ .Values.existingSecret }}
-            {{- end }}
             - name: SECRET_KEY_BASE
               valueFrom:
                 secretKeyRef:
@@ -472,7 +464,6 @@ spec:
                   key: GOOGLE_CLIENT_SECRET
                   name: {{ include "plausible-analytics.fullname" . }}
             {{- end }}
-            {{- if .Values.database.enabled }}
             {{- if .Values.database.url }}
             - name: DATABASE_URL
               valueFrom:
@@ -480,20 +471,17 @@ spec:
                   key: DATABASE_URL
                   name: {{ include "plausible-analytics.fullname" . }}
             {{- end }}
-            {{- end }}
             - name: SECRET_KEY_BASE
               valueFrom:
                 secretKeyRef:
                   key: SECRET_KEY_BASE
                   name: {{ include "plausible-analytics.fullname" . }}
-            {{- if .Values.clickhouse.enabled }}
             {{- if .Values.clickhouse.url }}
             - name: CLICKHOUSE_DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   key: CLICKHOUSE_DATABASE_URL
                   name: {{ include "plausible-analytics.fullname" . }}
-            {{- end }}
             {{- end }}
             {{- else}}
             - name: ADMIN_USER_EMAIL
@@ -511,20 +499,16 @@ spec:
                 secretKeyRef:
                   key: ADMIN_USER_PWD
                   name: {{ .Values.existingSecret }}
-            {{- if .Values.database.enabled }}
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   key: DATABASE_URL
                   name: {{ .Values.existingSecret }}
-            {{- end }}
-            {{- if .Values.clickhouse.enabled }}
             - name: CLICKHOUSE_DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   key: CLICKHOUSE_DATABASE_URL
                   name: {{ .Values.existingSecret }}
-            {{- end }}
             - name: SECRET_KEY_BASE
               valueFrom:
                 secretKeyRef:
