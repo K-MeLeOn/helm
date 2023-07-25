@@ -9,10 +9,6 @@ baseURL: # The hosting url of the server, used for URL generation. In production
 
 useExistingManifests: false # Use your Secret manifest, should be true with a gitops controller (ArgoCD, Flux, etc) and a secret manager (Sealed Secret, Vault, ect).
 # Must contains following fields:
-#   ADMIN_USER_NAME
-#   ADMIN_USER_EMAIL
-#   ADMIN_USER_PWD
-#   
 #   DATABASE_URL
 #   CLICKHOUSE_DATABASE_URL
 #   
@@ -52,12 +48,6 @@ existingSecret: "" # Secret manifest name
 #   SMTP_RETRIES
 #
 existingEnvVarsCM: "" # ConfigMap manifest name
-
-# Not used if useExistingManifest is true.
-adminUser:
-  email:  # Admin user's email
-  name:  # Display name admin user
-  password: # Admin user password
 
 # SECRET_KEY_BASE is Helm randAlphaNum 90
 
