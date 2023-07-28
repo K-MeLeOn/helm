@@ -26,7 +26,9 @@ spec:
     spec:
       {{- include "dragonfly.pod" . | trim | nindent 6 }}
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1	
+      kind: PersistentVolumeClaim
+      metadata:
         name: "{{ .Release.Name }}-data"
       spec:
         accessModes: [ "ReadWriteOnce" ]
