@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.21.2
-    created: "2023-07-25T14:27:13.568215051+02:00"
+    created: "2023-07-28T17:08:44.162675852+02:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -18,10 +18,30 @@ entries:
     urls:
     - https://k-meleon.github.io/helm-charts/altinity-clickhouse-operator-0.21.2.tgz
     version: 0.21.2
+  dragonfly:
+  - apiVersion: v2
+    appVersion: v1.6.2
+    created: "2023-07-28T17:08:44.163326774+02:00"
+    description: Dragonfly is a modern in-memory datastore, fully compatible with
+      Redis and Memcached APIs.
+    digest: a4a8b7403fec3b7f6fc3a283dce82022a5f71789fa2518bc43f389a3fe70a3ec
+    home: https://dragonflydb.io/
+    keywords:
+    - database
+    - keyvalue
+    - cache
+    kubeVersion: '>=1.23.0-0'
+    name: dragonfly
+    sources:
+    - https://github.com/dragonflydb/dragonfly
+    type: application
+    urls:
+    - https://k-meleon.github.io/helm-charts/dragonfly-v1.6.2.tgz
+    version: v1.6.2
   plausible-analytics:
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2023-07-25T14:27:13.568915946+02:00"
+    created: "2023-07-28T17:08:44.163894061+02:00"
     description: A Helm Chart for Plausible Analytics - a simple and privacy-friendly
       alternative to Google Analytics
     digest: 34a10cc86f59d4678d3be225dd4c35a6386b804138fa9bb3de5b51a46f8dc81d
@@ -43,4 +63,4 @@ entries:
     urls:
     - https://k-meleon.github.io/helm-charts/plausible-analytics-0.2.5.tgz
     version: 0.2.5
-generated: "2023-07-25T14:27:13.565533586+02:00"
+generated: "2023-07-28T17:08:44.15925867+02:00"
