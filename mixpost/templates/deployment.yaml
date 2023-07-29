@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mixpost.fullname" . }}
+  labels:
+    {{- include "mixpost.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "mixpost.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mixpost.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mixpost.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: LICENCE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.licenceKey.secretName }}
+                  name: {{ .Values.app.licenceKey.secretFieldName }}
+            - name: APP_NAME
+              value: {{ .Values.app.name }}
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.key.secretName }}
+                  name: {{ .Values.app.key.secretFieldName }}
+            - name: APP_URL
+              value: {{ .Values.app.licenceKey.secretName }}
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.db.mariaDB.host.secretName }}
+                  name: {{ .Values.db.mariaDB.host.secretFieldName }}
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.db.mariaDB.host.secretName }}
+                  name: {{ .Values.db.mariaDB.host.secretFieldName }}
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.db.mariaDB.port.secretName }}
+                  name: {{ .Values.db.mariaDB.port.secretFieldName }}
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.db.mariaDB.user.secretName }}
+                  name: {{ .Values.db.mariaDB.user.secretFieldName }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.db.mariaDB.pass.secretName }}
+                  name: {{ .Values.db.mariaDB.pass.secretFieldName }}
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.db.dragonfly.host.secretName }}
+                  name: {{ .Values.db.dragonfly.host.secretFieldName }}
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.db.dragonfly.port.secretName }}
+                  name: {{ .Values.db.dragonfly.port.secretFieldName }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.db.dragonfly.pass.secretName }}
+                  name: {{ .Values.db.dragonfly.pass.secretFieldName }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

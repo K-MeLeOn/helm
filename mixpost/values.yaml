@@ -1,0 +1,105 @@
+# Default values for mixpost.
+# This is a YAML-formatted file.
+
+replicaCount: 1
+
+image:
+  repository: inovector/mixpost-pro-team
+  pullPolicy: Always
+  tag: latest
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+app:
+  version: ^1.3
+  licenceKey:
+    secretName: 
+    secretFieldName: 
+  name: Mixpost
+  url: https://app.example.tld
+  key:  # https://mixpost.app/encryption-key-generator
+    secretName: 
+    secretFieldName: 
+  corePath: mixpost
+
+# External
+db:
+  mariaDB:
+    host:
+      secretName: 
+      secretFieldName: 
+    port:
+      secretName: 
+      secretFieldName: 
+    db:
+      secretName: 
+      secretFieldName: 
+    user:
+      secretName: 
+      secretFieldName: 
+    pass:
+      secretName: 
+      secretFieldName: 
+  dragonfly: # Redis works too
+    host:
+      secretName: 
+      secretFieldName: 
+    port:
+      secretName: 
+      secretFieldName: 
+    pass:
+      secretName: 
+      secretFieldName: 
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
