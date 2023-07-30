@@ -38,60 +38,65 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
+            - name: GEOIPUPDATE_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: GEOIPUPDATE_ACCOUNT_ID
+                  name: {{ .Values.existingSecret }}
             - name: LICENCE_KEY
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.app.licenceKey.secretName }}
-                  name: {{ .Values.app.licenceKey.secretFieldName }}
+                  key: LICENCE_KEY
+                  name: {{ .Values.app.licenceKey.secretName }}
             - name: APP_NAME
               value: {{ .Values.app.name }}
             - name: APP_KEY
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.app.key.secretName }}
-                  name: {{ .Values.app.key.secretFieldName }}
+                  key: APP_KEY
+                  name: {{ .Values.app.key.secretName }}
             - name: APP_URL
-              value: {{ .Values.app.licenceKey.secretName }}
+              value: {{ .Values.app.url }}
             - name: DB_HOST
               valueFrom:
-                secretKeyRef:
-                  key: {{ .Values.db.mariaDB.host.secretName }}
-                  name: {{ .Values.db.mariaDB.host.secretFieldName }}
+                configMapKeyRef:
+                  key: DB_HOST
+                  name: {{ .Values.db.mariaDB.host.configMapName }}
             - name: DB_DATABASE
               valueFrom:
-                secretKeyRef:
-                  key: {{ .Values.db.mariaDB.host.secretName }}
-                  name: {{ .Values.db.mariaDB.host.secretFieldName }}
+                configMapKeyRef:
+                  key: DB_DATABASE
+                  name: {{ .Values.db.mariaDB.host.configMapName }}
             - name: DB_PORT
               valueFrom:
-                secretKeyRef:
-                  key: {{ .Values.db.mariaDB.port.secretName }}
-                  name: {{ .Values.db.mariaDB.port.secretFieldName }}
+                configMapKeyRef:
+                  key: DB_PORT
+                  name: {{ .Values.db.mariaDB.port.configMapName }}
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.db.mariaDB.user.secretName }}
-                  name: {{ .Values.db.mariaDB.user.secretFieldName }}
+                  key: DB_USERNAME
+                  name: {{ .Values.db.mariaDB.user.secretName }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.db.mariaDB.pass.secretName }}
-                  name: {{ .Values.db.mariaDB.pass.secretFieldName }}
+                  key: DB_PASSWORD
+                  name: {{ .Values.db.mariaDB.pass.secretName }}
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.db.dragonfly.host.secretName }}
-                  name: {{ .Values.db.dragonfly.host.secretFieldName }}
+                  key: REDIS_HOST
+                  name: {{ .Values.db.dragonfly.host.configMapName }}
             - name: REDIS_PORT
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.db.dragonfly.port.secretName }}
-                  name: {{ .Values.db.dragonfly.port.secretFieldName }}
+                  key: REDIS_PORT
+                  name: {{ .Values.db.dragonfly.port.configMapName }}
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.db.dragonfly.pass.secretName }}
-                  name: {{ .Values.db.dragonfly.pass.secretFieldName }}
+                  key: REDIS_PASSWORD
+                  name: {{ .Values.db.dragonfly.pass.secretName }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

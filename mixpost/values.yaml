@@ -13,45 +13,37 @@ nameOverride: ""
 fullnameOverride: ""
 
 app:
-  version: ^1.3
-  licenceKey:
-    secretName: 
-    secretFieldName: 
+  version: ^x.x # Replace x.x by the app version
   name: Mixpost
-  url: https://app.example.tld
-  key:  # https://mixpost.app/encryption-key-generator
-    secretName: 
-    secretFieldName: 
   corePath: mixpost
 
-# External
+  licenceKey: # LICENCE_KEY
+    secretName: 
+  key: # https://mixpost.app/encryption-key-generator
+    secretName: 
+  url: # https://app.example.tld
+    configMapName:
+
+# External only
 db:
   mariaDB:
-    host:
+    host: # DB_HOST
+      configMapName: 
+    port: # DB_PORT
+      configMapName: 
+    db: # DB_DATABASE
+      configMapName: 
+    user: # DB_USERNAME
       secretName: 
-      secretFieldName: 
-    port:
+    pass: # DB_PASSWORD
       secretName: 
-      secretFieldName: 
-    db:
-      secretName: 
-      secretFieldName: 
-    user:
-      secretName: 
-      secretFieldName: 
-    pass:
-      secretName: 
-      secretFieldName: 
   dragonfly: # Redis works too
-    host:
+    host: # REDIS_HOST
+      configMapName: 
+    port: # REDIS_PORT
+      configMapName: 
+    pass: # REDIS_PASSWORD
       secretName: 
-      secretFieldName: 
-    port:
-      secretName: 
-      secretFieldName: 
-    pass:
-      secretName: 
-      secretFieldName: 
 
 serviceAccount:
   # Specifies whether a service account should be created
