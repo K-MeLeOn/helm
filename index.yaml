@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.21.2
-    created: "2023-09-20T11:46:09.567655043+02:00"
+    created: "2023-09-20T12:05:32.047000021+02:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -21,7 +21,7 @@ entries:
   dragonfly:
   - apiVersion: v2
     appVersion: v1.6.2
-    created: "2023-09-20T11:46:09.568065571+02:00"
+    created: "2023-09-20T12:05:32.047646801+02:00"
     description: Dragonfly is a modern in-memory datastore, fully compatible with
       Redis and Memcached APIs.
     digest: 26b4bf092a05c729efbfed9b0188a1c7aee18af994ce5c450fc46042e31bbbff
@@ -41,7 +41,7 @@ entries:
   mixpost:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-20T11:46:09.568271431+02:00"
+    created: "2023-09-20T12:05:32.04796411+02:00"
     description: A Helm chart for Kubernetes
     digest: 58b5f4484d24329144696dc61326ae78d4af57c69098cded433e005f4af1c6c2
     name: mixpost
@@ -52,18 +52,18 @@ entries:
   penpot:
   - apiVersion: v2
     appVersion: 1.19.2
-    created: "2023-09-20T11:46:09.568760519+02:00"
+    created: "2023-09-20T12:05:32.048467823+02:00"
     description: A Helm chart for Kubernetes
-    digest: 8792e64c3aafb120da27f573bb060642533438f292c4c93ac008b9ce65b75fd8
+    digest: 9b5b14b5c40d2ff5732d636f1cdef2217b39df1ade5e0a3bc45da1c464005496
     name: penpot
     type: application
     urls:
-    - https://k-meleon.github.io/helm-charts/penpot-1.0.0.tgz
-    version: 1.0.0
+    - https://k-meleon.github.io/helm-charts/penpot-1.0.1.tgz
+    version: 1.0.1
   plausible-analytics:
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2023-09-20T11:46:09.569173483+02:00"
+    created: "2023-09-20T12:05:32.048907825+02:00"
     description: A Helm Chart for Plausible Analytics - a simple and privacy-friendly
       alternative to Google Analytics
     digest: 34a10cc86f59d4678d3be225dd4c35a6386b804138fa9bb3de5b51a46f8dc81d
@@ -85,4 +85,4 @@ entries:
     urls:
     - https://k-meleon.github.io/helm-charts/plausible-analytics-0.2.5.tgz
     version: 0.2.5
-generated: "2023-09-20T11:46:09.563057713+02:00"
+generated: "2023-09-20T12:05:32.04284147+02:00"
