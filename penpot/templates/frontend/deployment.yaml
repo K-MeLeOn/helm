@@ -28,16 +28,6 @@ spec:
       serviceAccountName: {{ include "penpot.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.frontend.podSecurityContext | nindent 8 }}
-#      affinity:
-#        podAffinity:
-#          requiredDuringSchedulingIgnoredDuringExecution:
-#          - labelSelector:
-#              matchExpressions:
-#              - key: app.kubernetes.io/instance
-#                operator: In
-#                values:
-#                - {{ .Release.Name }}
-#            topologyKey: "kubernetes.io/hostname"
       containers:
         - name: {{ .Chart.Name }}-frontend
           securityContext:
@@ -49,8 +39,10 @@ spec:
               containerPort: {{ .Values.frontend.service.port }}
               protocol: TCP
           volumeMounts:
+            {{- if eq .Values.config.assets.storageBackend "assets-fs" }}
             - mountPath: /opt/data
               name: app-data
+            {{- end }}
             - mountPath: /etc/nginx/nginx.conf
               name: "{{ include "penpot.fullname" . }}-frontend-nginx"
               readOnly: true
@@ -65,12 +57,14 @@ spec:
           resources:
             {{- toYaml .Values.frontend.resources | nindent 12 }}
       volumes:
+        {{- if eq .Values.config.assets.storageBackend "assets-fs" }}
         - name: app-data
-        {{- if .Values.persistence.enabled }}
+          {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim | default ( include "penpot.fullname" . ) }}
-        {{- else }}
+          {{- else }}
           emptyDir: {}
+          {{- end }}
         {{- end }}
         - configMap:
             defaultMode: 420

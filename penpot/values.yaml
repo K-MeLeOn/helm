@@ -283,7 +283,7 @@ persistence:
   ## @param persistence.accessModes Persistent Volume access modes.
   ##
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   ## @param persistence.annotations Persistent Volume Claim annotations.
   ##
   annotations: {}
@@ -329,6 +329,8 @@ config:
     host: "redis-headless.penpot.svc"
     port: 6379
     database: "0"
+  ## @param config.dns The resolver, in docker the default is "127.0.0.11", for example with CoreDNS in k8s, it can be "kube-dns.kube-system.svc"
+  dns: ""
   ## @param config.assets.storageBackend The storage backend for assets to use. Use `assets-fs` for filesystem, and `assets-s3` for S3.
   ## @param config.assets.filesystem.directory The storage directory to use if you chose the filesystem storage backend.
   ## @param config.assets.s3.accessKeyID The S3 access key ID to use if you chose the S3 storage backend.
@@ -342,20 +344,17 @@ config:
   ## @param config.assets.s3.secretKeys.endpointURIKey The S3 endpoint URI to use from an existing secret.
   ##
   assets:
-    storageBackend: "assets-fs"
+    storageBackend: "assets-s3" # assets-s3 / assets-fs
     filesystem:
       directory: "/opt/data/assets"
     s3:
-      accessKeyID: ""
-      secretAccessKey: ""
-      region: ""
-      bucket: ""
-      endpointURI: ""
       existingSecret: ""
       secretKeys:
-        accessKeyIDKey: ""
+        accessKeyIdKey: ""
         secretAccessKey: ""
-        endpointURIKey: ""
+        endpointUriKey: ""
+      region: ""
+      bucket: ""
   ## @param config.telemetryEnabled Whether to enable sending of anonymous telemetry data.
   ##
   telemetryEnabled: true

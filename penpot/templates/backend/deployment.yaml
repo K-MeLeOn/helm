@@ -38,14 +38,12 @@ spec:
             - name: http
               containerPort: {{ .Values.backend.service.port }}
               protocol: TCP
+        {{- if eq .Values.config.assets.storageBackend "assets-fs" }}
           volumeMounts:
             - mountPath: /opt/data
               name: app-data
               readOnly: false
-#          args:
-#            - /bin/sh
-#            - -c
-#            - chown -R penpot:penpot /opt/data
+        {{- end  }}
           env:
             - name: PENPOT_PUBLIC_URI
               value: {{ .Values.config.publicURI }}
@@ -70,10 +68,34 @@ spec:
                   key: {{ .Values.config.postgresql.secretKeys.passwordKey }}
             - name: PENPOT_REDIS_URI
               value: redis://{{ .Values.config.redis.host }}:{{ .Values.config.redis.port }}/{{ .Values.config.redis.database }}
+
             - name: PENPOT_ASSETS_STORAGE_BACKEND
               value: {{ .Values.config.assets.storageBackend }}
+          {{- if eq .Values.config.assets.storageBackend "assets-fs" }}
             - name: PENPOT_STORAGE_ASSETS_FS_DIRECTORY
               value: {{ .Values.config.assets.filesystem.directory }}
+          {{- else if eq .Values.config.assets.storageBackend "assets-s3" }}
+            - name: PENPOT_STORAGE_ASSETS_S3_REGION
+              value: {{ .Values.config.assets.s3.region }}
+            - name: PENPOT_STORAGE_ASSETS_S3_BUCKET
+              value: {{ .Values.config.assets.s3.bucket }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.assets.s3.existingSecret }}
+                  key: {{ .Values.config.assets.s3.secretKeys.accessKeyIdKey }}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.assets.s3.existingSecret }}
+                  key: {{ .Values.config.assets.s3.secretKeys.secretAccessKey }}
+            - name: PENPOT_STORAGE_ASSETS_S3_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.assets.s3.existingSecret }}
+                  key: {{ .Values.config.assets.s3.secretKeys.endpointUriKey }}
+          {{- end }}
+
             - name: PENPOT_REGISTRATION_DOMAIN_WHITELIST
               value: {{ .Values.config.registrationDomainWhitelist }}
             - name: PENPOT_TELEMETRY_ENABLED
@@ -105,6 +127,7 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
+    {{- if eq .Values.config.assets.storageBackend "assets-fs" }}
       initContainers:
         - name: volume-mount-hack
           image: busybox
@@ -123,6 +146,7 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end }}
+    {{- end }}
       {{- with .Values.backend.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
