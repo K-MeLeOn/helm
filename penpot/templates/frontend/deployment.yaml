@@ -51,7 +51,6 @@ spec:
           volumeMounts:
             - mountPath: /opt/data
               name: app-data
-              readOnly: true
             - mountPath: /etc/nginx/nginx.conf
               name: "{{ include "penpot.fullname" . }}-frontend-nginx"
               readOnly: true
