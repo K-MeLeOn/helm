@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "penpot.fullname" . }}-backend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "penpot.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.backend.autoscaling.enabled }}
+  replicas: {{ .Values.backend.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "penpot.backendSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.backend.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "penpot.backendSelectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "penpot.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.backend.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-backend
+          securityContext:
+            {{- toYaml .Values.backend.securityContext | nindent 12 }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.backend.service.port }}
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /opt/data
+              name: app-data
+              readOnly: false
+#          args:
+#            - /bin/sh
+#            - -c
+#            - chown -R penpot:penpot /opt/data
+          env:
+            - name: PENPOT_PUBLIC_URI
+              value: {{ .Values.config.publicURI }}
+            - name: PENPOT_FLAGS
+              value: $PENPOT_FLAGS {{ .Values.config.flags }}
+            - name: PENPOT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.apiSecretKeys.existingSecret }}
+                  key: {{ .Values.config.apiSecretKeys.secretKey }}
+            - name: PENPOT_DATABASE_URI
+              value: postgresql://{{ .Values.config.postgresql.host }}:{{ .Values.config.postgresql.port }}/{{ .Values.config.postgresql.database }}
+            - name: PENPOT_DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.postgresql.existingSecret }}
+                  key: {{ .Values.config.postgresql.secretKeys.usernameKey }}
+            - name: PENPOT_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.postgresql.existingSecret }}
+                  key: {{ .Values.config.postgresql.secretKeys.passwordKey }}
+            - name: PENPOT_REDIS_URI
+              value: redis://{{ .Values.config.redis.host }}:{{ .Values.config.redis.port }}/{{ .Values.config.redis.database }}
+            - name: PENPOT_ASSETS_STORAGE_BACKEND
+              value: {{ .Values.config.assets.storageBackend }}
+            - name: PENPOT_STORAGE_ASSETS_FS_DIRECTORY
+              value: {{ .Values.config.assets.filesystem.directory }}
+            - name: PENPOT_REGISTRATION_DOMAIN_WHITELIST
+              value: {{ .Values.config.registrationDomainWhitelist }}
+            - name: PENPOT_TELEMETRY_ENABLED
+              value: "{{ .Values.config.telemetryEnabled }}"
+
+            {{- if .Values.config.smtp.enabled }}
+            - name: PENPOT_SMTP_DEFAULT_FROM
+              value: {{ .Values.config.smtp.defaultFrom }}
+            - name: PENPOT_SMTP_DEFAULT_REPLY_TO
+              value: {{ .Values.config.smtp.defaultReplyTo }}
+            - name: PENPOT_SMTP_HOST
+              value: {{ .Values.config.smtp.host }}
+            - name: PENPOT_SMTP_PORT
+              value: "{{ .Values.config.smtp.port }}"
+            - name: PENPOT_SMTP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.smtp.existingSecret }}
+                  key: {{ .Values.config.smtp.secretKeys.usernameKey }}
+            - name: PENPOT_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.smtp.existingSecret }}
+                  key: {{ .Values.config.smtp.secretKeys.passwordKey }}
+            - name: PENPOT_SMTP_SSL
+              value: "{{ .Values.config.smtp.ssl }}"
+            - name: PENPOT_SMTP_TLS
+              value: "{{ .Values.config.smtp.tls }}"
+            {{- end }}
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+      initContainers:
+        - name: volume-mount-hack
+          image: busybox
+          command:
+            - sh
+            - -c
+            - chown -R 1001:1001 /opt/data
+          volumeMounts:
+          - name: app-data
+            mountPath: /opt/data
+      volumes:
+        - name: app-data
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default ( include "penpot.fullname" . ) }}
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+      {{- with .Values.backend.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
