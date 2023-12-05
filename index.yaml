@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.21.2
-    created: "2023-09-20T18:11:45.152461339+02:00"
+    created: "2023-12-05T16:11:02.048959126+01:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -16,12 +16,12 @@ entries:
     name: altinity-clickhouse-operator
     type: application
     urls:
-    - https://k-meleon.github.io/helm-charts/altinity-clickhouse-operator-0.21.2.tgz
+    - altinity-clickhouse-operator-0.21.2.tgz
     version: 0.21.2
   dragonfly:
   - apiVersion: v2
     appVersion: v1.6.2
-    created: "2023-09-20T18:11:45.152981904+02:00"
+    created: "2023-12-05T16:11:02.049718396+01:00"
     description: Dragonfly is a modern in-memory datastore, fully compatible with
       Redis and Memcached APIs.
     digest: 26b4bf092a05c729efbfed9b0188a1c7aee18af994ce5c450fc46042e31bbbff
@@ -36,34 +36,57 @@ entries:
     - https://github.com/dragonflydb/dragonfly
     type: application
     urls:
-    - https://k-meleon.github.io/helm-charts/dragonfly-v1.6.3.tgz
+    - dragonfly-v1.6.3.tgz
     version: v1.6.3
+  invoiceninja:
+  - apiVersion: v2
+    appVersion: 5.6.24
+    created: "2023-12-05T16:11:02.053013491+01:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: A Helm chart for Kubernetes
+    digest: 22a992100e416caee61cfde2f692f4d44c47cd2a27e89f2d61e01b37e8e82a68
+    home: https://invoiceninja.github.io/dockerfiles
+    keywords:
+    - invoiceninja
+    name: invoiceninja
+    sources:
+    - https://github.com/invoiceninja/invoiceninja
+    - https://github.com/invoiceninja/dockerfiles
+    type: application
+    urls:
+    - invoiceninja-0.10.2.tgz
+    version: 0.10.2
   mixpost:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-09-20T18:11:45.153198194+02:00"
+    created: "2023-12-05T16:11:02.053602516+01:00"
     description: A Helm chart for Kubernetes
     digest: 58b5f4484d24329144696dc61326ae78d4af57c69098cded433e005f4af1c6c2
     name: mixpost
     type: application
     urls:
-    - https://k-meleon.github.io/helm-charts/mixpost-0.2.0.tgz
+    - mixpost-0.2.0.tgz
     version: 0.2.0
   penpot:
   - apiVersion: v2
     appVersion: 1.19.2
-    created: "2023-09-20T18:11:45.153683764+02:00"
+    created: "2023-12-05T16:11:02.054494341+01:00"
     description: A Helm chart for Kubernetes
     digest: 62c50b50435e948256a8356ac3ff5afefbb339a6029b932b47b8c34726ea46f1
     name: penpot
     type: application
     urls:
-    - https://k-meleon.github.io/helm-charts/penpot-1.0.2.tgz
+    - penpot-1.0.2.tgz
     version: 1.0.2
   plausible-analytics:
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2023-09-20T18:11:45.154089909+02:00"
+    created: "2023-12-05T16:11:02.055479616+01:00"
     description: A Helm Chart for Plausible Analytics - a simple and privacy-friendly
       alternative to Google Analytics
     digest: 34a10cc86f59d4678d3be225dd4c35a6386b804138fa9bb3de5b51a46f8dc81d
@@ -83,6 +106,6 @@ entries:
     - https://github.com/k-meleon/helm-charts
     type: application
     urls:
-    - https://k-meleon.github.io/helm-charts/plausible-analytics-0.2.5.tgz
+    - plausible-analytics-0.2.5.tgz
     version: 0.2.5
-generated: "2023-09-20T18:11:45.149677631+02:00"
+generated: "2023-12-05T16:11:02.044207699+01:00"
