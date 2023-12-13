@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.21.2
-    created: "2023-12-05T16:11:02.048959126+01:00"
+    created: "2023-12-13T13:57:32.066005348+01:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -21,7 +21,7 @@ entries:
   dragonfly:
   - apiVersion: v2
     appVersion: v1.6.2
-    created: "2023-12-05T16:11:02.049718396+01:00"
+    created: "2023-12-13T13:57:32.066820982+01:00"
     description: Dragonfly is a modern in-memory datastore, fully compatible with
       Redis and Memcached APIs.
     digest: 26b4bf092a05c729efbfed9b0188a1c7aee18af994ce5c450fc46042e31bbbff
@@ -41,7 +41,7 @@ entries:
   invoiceninja:
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2023-12-05T16:11:02.053013491+01:00"
+    created: "2023-12-13T13:57:32.068039317+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -64,7 +64,7 @@ entries:
   mixpost:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-12-05T16:11:02.053602516+01:00"
+    created: "2023-12-13T13:57:32.068280949+01:00"
     description: A Helm chart for Kubernetes
     digest: 58b5f4484d24329144696dc61326ae78d4af57c69098cded433e005f4af1c6c2
     name: mixpost
@@ -72,10 +72,54 @@ entries:
     urls:
     - mixpost-0.2.0.tgz
     version: 0.2.0
+  n8n:
+  - annotations:
+      artifacthub.io/changes: "- kind: added\n  description: \"Chart 0.13.0 adds support
+        for app version 1.7.1\"\n- kind: changed\n  description: \"Correctly perform
+        semantic version comparison\"\n  links:\n    - name: \"GitHub PR\"\n        url:
+        https://github.com/8gears/n8n-helm-chart/pull/54    \n- kind: changed\n  description:
+        \"Fixed secret volume mnt for existing secret\"\n  links:\n    - name: \"GitHub
+        PR\"\n        url: https://github.com/8gears/n8n-helm-chart/pull/51\n- kind:
+        changed\n  description: \"Updated App Version to 1.5.1\"\n- kind: added\n
+        \ description: \"Added support for specifying initContainers and probes\"\n-
+        kind: changed\n  description: \"Updated App Version to 0.236.3\"\n- kind:
+        added\n  description: \"Support Kubernetes 1.25\"\n  links:\n    - name: \"GitHub
+        PR\"\n      url: https://github.com/8gears/n8n-helm-chart/pull/46\n"
+    apiVersion: v2
+    appVersion: 1.7.1
+    created: "2023-12-13T13:57:32.072019194+01:00"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.2.0
+    description: A Kubernetes Helm chart for n8n a free and open fair-code licensed
+      node based Workflow Automation Tool. Easily automate tasks across different
+      services.
+    digest: 559c1fb4819ee6a318833b0fd27bb3278895549c666b49fac25a3dbc23f63bb4
+    home: https://github.com/8gears/n8n-helm-chart
+    icon: https://avatars1.githubusercontent.com/u/45487711?s=200&v=4
+    keywords:
+    - Workflow Automation
+    - Workflow
+    - iPaaS
+    - integration-framework
+    - low-code-plattform
+    - low-code
+    maintainers:
+    - name: Vadim Bauer
+    name: n8n
+    sources:
+    - https://github.com/n8n-io/n8n
+    - https://n8n.io/
+    type: application
+    urls:
+    - n8n-0.13.0.tgz
+    version: 0.13.0
   penpot:
   - apiVersion: v2
     appVersion: 1.19.2
-    created: "2023-12-05T16:11:02.054494341+01:00"
+    created: "2023-12-13T13:57:32.07340026+01:00"
     description: A Helm chart for Kubernetes
     digest: 62c50b50435e948256a8356ac3ff5afefbb339a6029b932b47b8c34726ea46f1
     name: penpot
@@ -86,7 +130,7 @@ entries:
   plausible-analytics:
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2023-12-05T16:11:02.055479616+01:00"
+    created: "2023-12-13T13:57:32.074190026+01:00"
     description: A Helm Chart for Plausible Analytics - a simple and privacy-friendly
       alternative to Google Analytics
     digest: 34a10cc86f59d4678d3be225dd4c35a6386b804138fa9bb3de5b51a46f8dc81d
@@ -108,4 +152,4 @@ entries:
     urls:
     - plausible-analytics-0.2.5.tgz
     version: 0.2.5
-generated: "2023-12-05T16:11:02.044207699+01:00"
+generated: "2023-12-13T13:57:32.063084789+01:00"
