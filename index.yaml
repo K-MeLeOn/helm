@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.21.2
-    created: "2023-12-13T13:57:32.066005348+01:00"
+    created: "2024-01-18T14:50:11.515651157+01:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -21,7 +21,7 @@ entries:
   dragonfly:
   - apiVersion: v2
     appVersion: v1.6.2
-    created: "2023-12-13T13:57:32.066820982+01:00"
+    created: "2024-01-18T14:50:11.517075547+01:00"
     description: Dragonfly is a modern in-memory datastore, fully compatible with
       Redis and Memcached APIs.
     digest: 26b4bf092a05c729efbfed9b0188a1c7aee18af994ce5c450fc46042e31bbbff
@@ -41,7 +41,29 @@ entries:
   invoiceninja:
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2023-12-13T13:57:32.068039317+01:00"
+    created: "2024-01-18T14:50:11.521119128+01:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: A Helm chart for Kubernetes
+    digest: dff332f51999032f87d1f4121a4fdf262eae30b18e43b5de8c5e8a4b3908e8c3
+    home: https://invoiceninja.github.io/dockerfiles
+    keywords:
+    - invoiceninja
+    name: invoiceninja
+    sources:
+    - https://github.com/invoiceninja/invoiceninja
+    - https://github.com/invoiceninja/dockerfiles
+    type: application
+    urls:
+    - invoiceninja-0.10.3.tgz
+    version: 0.10.3
+  - apiVersion: v2
+    appVersion: 5.6.24
+    created: "2024-01-18T14:50:11.51912248+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -64,7 +86,7 @@ entries:
   mixpost:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-12-13T13:57:32.068280949+01:00"
+    created: "2024-01-18T14:50:11.521443888+01:00"
     description: A Helm chart for Kubernetes
     digest: 58b5f4484d24329144696dc61326ae78d4af57c69098cded433e005f4af1c6c2
     name: mixpost
@@ -87,7 +109,7 @@ entries:
         PR\"\n      url: https://github.com/8gears/n8n-helm-chart/pull/46\n"
     apiVersion: v2
     appVersion: 1.7.1
-    created: "2023-12-13T13:57:32.072019194+01:00"
+    created: "2024-01-18T14:50:11.526625362+01:00"
     dependencies:
     - condition: redis.enabled
       name: redis
@@ -119,7 +141,7 @@ entries:
   penpot:
   - apiVersion: v2
     appVersion: 1.19.2
-    created: "2023-12-13T13:57:32.07340026+01:00"
+    created: "2024-01-18T14:50:11.527366035+01:00"
     description: A Helm chart for Kubernetes
     digest: 62c50b50435e948256a8356ac3ff5afefbb339a6029b932b47b8c34726ea46f1
     name: penpot
@@ -130,7 +152,7 @@ entries:
   plausible-analytics:
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2023-12-13T13:57:32.074190026+01:00"
+    created: "2024-01-18T14:50:11.527927495+01:00"
     description: A Helm Chart for Plausible Analytics - a simple and privacy-friendly
       alternative to Google Analytics
     digest: 34a10cc86f59d4678d3be225dd4c35a6386b804138fa9bb3de5b51a46f8dc81d
@@ -152,4 +174,4 @@ entries:
     urls:
     - plausible-analytics-0.2.5.tgz
     version: 0.2.5
-generated: "2023-12-13T13:57:32.063084789+01:00"
+generated: "2024-01-18T14:50:11.511411856+01:00"
