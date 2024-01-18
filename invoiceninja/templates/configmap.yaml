@@ -13,6 +13,7 @@ metadata:
   {{- end }}
 data:
   APP_URL: {{ include "invoiceninja.url" . | quote }}
+  REACT_URL: {{ include "invoiceninja.url" . | quote }}
   APP_DEBUG: {{ .Values.debug | quote }}
   DB_HOST: {{ include "invoiceninja.databaseHost" . | quote }}
   DB_PORT: {{ include "invoiceninja.databasePort" . | quote }}
