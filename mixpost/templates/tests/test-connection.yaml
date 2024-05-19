@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "mixpost.fullname" . }}-test-connection"
+  labels:
+    {{- include "mixpost.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "mixpost.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
