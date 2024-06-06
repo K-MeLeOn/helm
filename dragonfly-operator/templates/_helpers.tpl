@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "dragonfly.name" -}}
+{{- define "dragonfly-operator.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "dragonfly.fullname" -}}
+{{- define "dragonfly-operator.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,36 +26,37 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "dragonfly.chart" -}}
+{{- define "dragonfly-operator.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "dragonfly.labels" -}}
-helm.sh/chart: {{ include "dragonfly.chart" . }}
-{{ include "dragonfly.selectorLabels" . }}
+{{- define "dragonfly-operator.labels" -}}
+helm.sh/chart: {{ include "dragonfly-operator.chart" . }}
+{{ include "dragonfly-operator.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/created-by: {{ include "dragonfly-operator.name" . }}
+app.kubernetes.io/part-of: {{ include "dragonfly-operator.name" . }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
-{{- define "dragonfly.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "dragonfly.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{- define "dragonfly-operator.selectorLabels" -}}
+control-plane: controller-manager
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "dragonfly.serviceAccountName" -}}
+{{- define "dragonfly-operator.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "dragonfly.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "dragonfly-operator.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
