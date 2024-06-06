@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.21.2
-    created: "2024-05-19T23:16:27.73361981+02:00"
+    created: "2024-06-07T01:52:21.985842196+02:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -21,7 +21,7 @@ entries:
   directus:
   - apiVersion: v2
     appVersion: 9.5.1
-    created: "2024-05-19T23:16:27.734477648+02:00"
+    created: "2024-06-07T01:52:21.986866495+02:00"
     description: A Helm chart for installing Directus on Kubernetes
     digest: 033619d2ec8abe9e887d6f8910cf5328b2c127f5212778548b9f48eebe8318d7
     name: directus
@@ -32,7 +32,7 @@ entries:
   dragonfly:
   - apiVersion: v2
     appVersion: v1.6.2
-    created: "2024-05-19T23:16:27.735638897+02:00"
+    created: "2024-06-07T01:52:21.989832151+02:00"
     description: Dragonfly is a modern in-memory datastore, fully compatible with
       Redis and Memcached APIs.
     digest: 26b4bf092a05c729efbfed9b0188a1c7aee18af994ce5c450fc46042e31bbbff
@@ -49,10 +49,21 @@ entries:
     urls:
     - dragonfly-v1.6.3.tgz
     version: v1.6.3
+  dragonfly-operator:
+  - apiVersion: v2
+    appVersion: v1.1.2
+    created: "2024-06-07T01:52:21.988550865+02:00"
+    description: A Helm chart for dragonfly-operator
+    digest: 91db04dca1597d6d4c529929b5a3dffff2e037545794e89f7a7fd7321b51e195
+    name: dragonfly-operator
+    type: application
+    urls:
+    - dragonfly-operator-0.1.0.tgz
+    version: 0.1.0
   invoiceninja:
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-05-19T23:16:27.754717994+02:00"
+    created: "2024-06-07T01:52:22.011429046+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -74,7 +85,7 @@ entries:
     version: 1.0.0
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-05-19T23:16:27.75071686+02:00"
+    created: "2024-06-07T01:52:22.008114552+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -96,7 +107,7 @@ entries:
     version: 0.10.5
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-05-19T23:16:27.747116573+02:00"
+    created: "2024-06-07T01:52:22.004492755+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -118,7 +129,7 @@ entries:
     version: 0.10.4
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-05-19T23:16:27.743505474+02:00"
+    created: "2024-06-07T01:52:21.998767484+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -140,7 +151,7 @@ entries:
     version: 0.10.3
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-05-19T23:16:27.739686846+02:00"
+    created: "2024-06-07T01:52:21.99322412+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -163,7 +174,7 @@ entries:
   mixpost:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-05-19T23:16:27.755649964+02:00"
+    created: "2024-06-07T01:52:22.012194236+02:00"
     description: A Helm chart for Kubernetes
     digest: 58b5f4484d24329144696dc61326ae78d4af57c69098cded433e005f4af1c6c2
     name: mixpost
@@ -186,7 +197,7 @@ entries:
         PR\"\n      url: https://github.com/8gears/n8n-helm-chart/pull/46\n"
     apiVersion: v2
     appVersion: 1.7.1
-    created: "2024-05-19T23:16:27.767456962+02:00"
+    created: "2024-06-07T01:52:22.025888208+02:00"
     dependencies:
     - condition: redis.enabled
       name: redis
@@ -218,7 +229,7 @@ entries:
   penpot:
   - apiVersion: v2
     appVersion: 1.19.2
-    created: "2024-05-19T23:16:27.769247273+02:00"
+    created: "2024-06-07T01:52:22.027417096+02:00"
     description: A Helm chart for Kubernetes
     digest: 62c50b50435e948256a8356ac3ff5afefbb339a6029b932b47b8c34726ea46f1
     name: penpot
@@ -229,7 +240,7 @@ entries:
   plausible-analytics:
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2024-05-19T23:16:27.770627407+02:00"
+    created: "2024-06-07T01:52:22.028841185+02:00"
     description: A Helm Chart for Plausible Analytics - a simple and privacy-friendly
       alternative to Google Analytics
     digest: 34a10cc86f59d4678d3be225dd4c35a6386b804138fa9bb3de5b51a46f8dc81d
@@ -251,4 +262,4 @@ entries:
     urls:
     - plausible-analytics-0.2.5.tgz
     version: 0.2.5
-generated: "2024-05-19T23:16:27.72664979+02:00"
+generated: "2024-06-07T01:52:21.977644038+02:00"
