@@ -60,3 +60,10 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Return the proper Storage Name
+*/}}
+{{- define "persistence.storage.name" -}}
+{{- printf "%s-%s" .Release.Name "storage" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}

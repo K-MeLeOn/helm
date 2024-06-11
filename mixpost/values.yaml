@@ -4,7 +4,7 @@
 replicaCount: 1
 
 image:
-  repository: inovector/mixpost-pro-team
+  repository: inovector/mixpost-entreprise
   pullPolicy: Always
   tag: latest
 
@@ -13,37 +13,90 @@ nameOverride: ""
 fullnameOverride: ""
 
 app:
-  version: ^x.x # Replace x.x by the app version
   name: Mixpost
   corePath: mixpost
 
+  defaultLocale: fr-FR
+
   licenceKey: # LICENCE_KEY
     secretName: 
+    secretKey: 
+  
+  composerAuth: # COMPOSER_AUTH
+    secretName: 
+    secretKey: 
+      # Encode the next line into a base64 string. Dont forget to change TO_REPLACE with your LICENCE_KEY
+      # {"http-basic": {"packages.inovector.com": {"username": "username","password": "TO_REPLACE"}}}
+  
   key: # https://mixpost.app/encryption-key-generator
     secretName: 
+    secretKey: 
+  
   url: # https://app.example.tld
-    configMapName:
+    configMapName: 
+    configMapKey: 
+  
+  domain: # url without http(s):// like mixpost.mydomain.tld
+    configMapName: 
+    configMapKey: 
+  
+  # App media storage
+  storage:
+    s3:
+      enabled: false
+      accessKey:
+        secretName: 
+        secretKey:
+      secretAccessKey:
+        secretName: 
+        secretKey: 
+      region:
+        secretName: 
+        secretKey:
+      bucket:
+        secretName: 
+        secretKey:
+      endpoint:
+        secretName: 
+        secretKey: 
+      usePathStyleEndpoint:
+        secretName: 
+        secretKey: 
+
+    public:
+      enabled: false
+      size: 
+      storageClass: 
+      existingClaim: 
 
 # External only
 db:
   mariaDB:
     host: # DB_HOST
       configMapName: 
+      configMapKey:
     port: # DB_PORT
       configMapName: 
+      configMapKey:
     db: # DB_DATABASE
       configMapName: 
+      configMapKey:
     user: # DB_USERNAME
       secretName: 
+      secretKey: 
     pass: # DB_PASSWORD
       secretName: 
+      secretKey: 
   dragonfly: # Redis works too
     host: # REDIS_HOST
       configMapName: 
+      configMapKey:
     port: # REDIS_PORT
       configMapName: 
+      configMapKey:
     pass: # REDIS_PASSWORD
       secretName: 
+      secretKey: 
 
 serviceAccount:
   # Specifies whether a service account should be created

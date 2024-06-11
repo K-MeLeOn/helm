@@ -35,70 +35,129 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
               protocol: TCP
+              containerPort: {{ .Values.service.port }}
           env:
-            - name: GEOIPUPDATE_ACCOUNT_ID
-              valueFrom:
-                secretKeyRef:
-                  key: GEOIPUPDATE_ACCOUNT_ID
-                  name: {{ .Values.existingSecret }}
+            - name: COMPOSER_ALLOW_SUPERUSER
+              value: '1'
             - name: LICENCE_KEY
               valueFrom:
                 secretKeyRef:
-                  key: LICENCE_KEY
+                  key: {{ .Values.app.licenceKey.secretKey }}
                   name: {{ .Values.app.licenceKey.secretName }}
+            - name: COMPOSER_AUTH
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.composerAuth.secretKey }}
+                  name: {{ .Values.app.composerAuth.secretName }}
             - name: APP_NAME
               value: {{ .Values.app.name }}
+            - name: MIXPOST_CORE_PATH
+              value: {{ .Values.app.corePath }}
             - name: APP_KEY
               valueFrom:
                 secretKeyRef:
-                  key: APP_KEY
+                  key: {{ .Values.app.key.secretKey }}
                   name: {{ .Values.app.key.secretName }}
             - name: APP_URL
-              value: {{ .Values.app.url }}
+              valueFrom:
+                configMapKeyRef:
+                  key: {{ .Values.app.url.configMapKey }}
+                  name: {{ .Values.app.url.configMapName }}
+            - name: APP_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  key: {{ .Values.app.domain.configMapKey }}
+                  name: {{ .Values.app.domain.configMapName }}
+            {{- if .Values.app.storage.s3.enabled }}
+            - name: MIXPOST_DISK
+              value: s3
+            {{ end }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.storage.s3.accessKey.secretKey }}
+                  name: {{ .Values.app.storage.s3.accessKey.secretName }}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.storage.s3.secretAccessKey.secretKey }}
+                  name: {{ .Values.app.storage.s3.secretAccessKey.secretName }}
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.storage.s3.region.secretKey }}
+                  name: {{ .Values.app.storage.s3.region.secretName }}
+            - name: AWS_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.storage.s3.bucket.secretKey }}
+                  name: {{ .Values.app.storage.s3.bucket.secretName }}
+            - name: AWS_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.storage.s3.endpoint.secretKey }}
+                  name: {{ .Values.app.storage.s3.endpoint.secretName }}
+            - name: AWS_USE_PATH_STYLE_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.app.storage.s3.usePathStyleEndpoint.secretKey }}
+                  name: {{ .Values.app.storage.s3.usePathStyleEndpoint.secretName }}
+            - name: MIXPOST_DEFAULT_LOCALE
+              value: {{ .Values.app.defaultLocale }}
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
-                  key: DB_HOST
+                  key: {{ .Values.db.mariaDB.host.configMapKey }}
                   name: {{ .Values.db.mariaDB.host.configMapName }}
             - name: DB_DATABASE
               valueFrom:
                 configMapKeyRef:
-                  key: DB_DATABASE
-                  name: {{ .Values.db.mariaDB.host.configMapName }}
+                  key: {{ .Values.db.mariaDB.db.configMapKey }}
+                  name: {{ .Values.db.mariaDB.db.configMapName }}
             - name: DB_PORT
               valueFrom:
                 configMapKeyRef:
-                  key: DB_PORT
+                  key: {{ .Values.db.mariaDB.port.configMapKey }}
                   name: {{ .Values.db.mariaDB.port.configMapName }}
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  key: DB_USERNAME
+                  key: {{ .Values.db.mariaDB.user.secretKey }}
                   name: {{ .Values.db.mariaDB.user.secretName }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: DB_PASSWORD
+                  key: {{ .Values.db.mariaDB.pass.secretKey }}
                   name: {{ .Values.db.mariaDB.pass.secretName }}
             - name: REDIS_HOST
               valueFrom:
-                secretKeyRef:
-                  key: REDIS_HOST
+                configMapKeyRef:
+                  key: {{ .Values.db.dragonfly.host.configMapKey }}
                   name: {{ .Values.db.dragonfly.host.configMapName }}
             - name: REDIS_PORT
               valueFrom:
-                secretKeyRef:
-                  key: REDIS_PORT
+                configMapKeyRef:
+                  key: {{ .Values.db.dragonfly.port.configMapKey }}
                   name: {{ .Values.db.dragonfly.port.configMapName }}
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: REDIS_PASSWORD
+                  key: {{ .Values.db.dragonfly.pass.secretKey }}
                   name: {{ .Values.db.dragonfly.pass.secretName }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/www/html/storage/app
+              name: storage
+      volumes:
+        - name: storage
+          {{- if and .Values.app.storage.public.enabled (not .Values.app.storage.public.existingClaim) (not .Values.app.storage.s3.enabled) }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.app.storage.public.existingClaim | default (include "persistence.storage.name" .) }}
+          {{- else }}
+          emptyDir: {}
+          {{ end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
