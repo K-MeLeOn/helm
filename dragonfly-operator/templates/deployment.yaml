@@ -14,7 +14,6 @@ spec:
   selector:
     matchLabels:
       {{- include "dragonfly-operator.selectorLabels" . | nindent 6 }}
-      control-plane: controller-manager
   template:
     metadata:
       {{- with .Values.podAnnotations }}
