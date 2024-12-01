@@ -4,23 +4,31 @@ metadata:
   name: {{ include "dragonfly-operator.fullname" . }}
   labels:
     {{- include "dragonfly-operator.labels" . | nindent 4 }}
+    app.kubernetes.io/component: manager
+    app.kubernetes.io/instance: controller-manager
+    app.kubernetes.io/name: deployment
+    app.kubernetes.io/part-of: {{ include "dragonfly-operator.fullname" . }}
+    control-plane: controller-manager
   namespace: {{ .Release.Namespace | quote }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "dragonfly-operator.selectorLabels" . | nindent 6 }}
+      control-plane: controller-manager
   template:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
+        kubectl.kubernetes.io/default-container: manager
       {{- end }}
       labels:
         {{- include "dragonfly-operator.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        control-plane: controller-manager
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -42,17 +50,11 @@ spec:
           securityContext:
             {{- toYaml .Values.rbacProxy.securityContext | nindent 12 }}
           ports:
-            - containerPort: 8443
+            - containerPort: {{ .Values.service.port }}
               name: https
               protocol: TCP
           resources:
-            limits:
-              cpu: 500m
-              memory: 128Mi
-            requests:
-              cpu: 5m
-              memory: 64Mi
-
+            {{- toYaml .Values.rbacProxy.resources | nindent 12 }}
         - name: manager
           args:
             - --health-probe-bind-address=:8081

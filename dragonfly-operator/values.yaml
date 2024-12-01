@@ -44,15 +44,15 @@ rbacProxy:
     repository: gcr.io/kubebuilder/kube-rbac-proxy
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: v0.13.1
+    tag: v0.16.0
 
-  resources: {}
-#    limits:
-#      cpu: 500m
-#      memory: 128Mi
-#    requests:
-#      cpu: 10m
-#      memory: 64Mi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 128Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
 
   securityContext:
     allowPrivilegeEscalation: false
@@ -65,16 +65,15 @@ manager:
     repository: docker.dragonflydb.io/dragonflydb/operator
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+    tag: v1.1.8
 
-
-  resources: {}
-#    limits:
-#      cpu: 500m
-#      memory: 128Mi
-#    requests:
-#      cpu: 10m
-#      memory: 64Mi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 128Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
 
   livenessProbe:
     httpGet:
@@ -100,12 +99,12 @@ manager:
 
   tolerations: []
 
-
   # -- Assign custom [TopologySpreadConstraints] rules to the application controller
   # @default -- `[]` (defaults to global.topologySpreadConstraints)
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
   ## If labelSelector is left out, it will default to the labelSelector configuration of the deployment
-  topologySpreadConstraints: []
+  topologySpreadConstraints:
+    []
     # - maxSkew: 1
     #   topologyKey: topology.kubernetes.io/zone
   #   whenUnsatisfiable: DoNotSchedule

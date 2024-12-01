@@ -1,4 +1,3 @@
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -75,39 +74,3 @@ rules:
       - get
       - patch
       - update
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: {{ include "dragonfly-operator.fullname" . }}-metrics-reader
-  labels:
-    {{- include "dragonfly-operator.labels" . | nindent 4 }}
-    app.kubernetes.io/component: kube-rbac-proxy
-    app.kubernetes.io/instance: metrics-reader
-rules:
-  - nonResourceURLs:
-      - /metrics
-    verbs:
-      - get
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: {{ include "dragonfly-operator.fullname" . }}-proxy-role
-  labels:
-    {{- include "dragonfly-operator.labels" . | nindent 4 }}
-    app.kubernetes.io/component: kube-rbac-proxy
-    app.kubernetes.io/instance: proxy-role
-rules:
-  - apiGroups:
-      - authentication.k8s.io
-    resources:
-      - tokenreviews
-    verbs:
-      - create
-  - apiGroups:
-      - authorization.k8s.io
-    resources:
-      - subjectaccessreviews
-    verbs:
-      - create

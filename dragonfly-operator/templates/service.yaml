@@ -5,6 +5,10 @@ metadata:
   labels:
     {{- include "dragonfly-operator.labels" . | nindent 4 }}
     app.kubernetes.io/component: kube-rbac-proxy
+    app.kubernetes.io/instance: controller-manager-metrics-service
+    app.kubernetes.io/name: service
+    app.kubernetes.io/part-of: {{ include "dragonfly-operator.fullname" . }}
+    control-plane: controller-manager
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -14,3 +18,4 @@ spec:
       name: https
   selector:
     {{- include "dragonfly-operator.selectorLabels" . | nindent 4 }}
+    control-plane: controller-manager
