@@ -120,21 +120,25 @@ spec:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
                   resource: requests.cpu
+                  divisor: '0'
             - name: OPERATOR_CONTAINER_CPU_LIMIT
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
                   resource: limits.cpu
+                  divisor: '0'
             - name: OPERATOR_CONTAINER_MEM_REQUEST
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
                   resource: requests.memory
+                  divisor: '0'
             - name: OPERATOR_CONTAINER_MEM_LIMIT
               valueFrom:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
                   resource: limits.memory
+                  divisor: '0'
             {{ with .Values.operator.env }}{{ toYaml . | nindent 12 }}{{ end }}
           ports:
             - containerPort: 9999
