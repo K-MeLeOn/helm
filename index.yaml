@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.24.2
-    created: "2024-12-06T19:46:23.028077989+01:00"
+    created: "2025-01-06T13:17:54.862427713+01:00"
     description: 'Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.  For upgrade please install CRDs separately: ```bash   kubectl
@@ -28,7 +28,7 @@ entries:
     version: 0.24.2
   - apiVersion: v2
     appVersion: 0.21.2
-    created: "2024-12-06T19:46:23.020653012+01:00"
+    created: "2025-01-06T13:17:54.855532645+01:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -46,7 +46,7 @@ entries:
   directus:
   - apiVersion: v2
     appVersion: 9.5.1
-    created: "2024-12-06T19:46:23.028746368+01:00"
+    created: "2025-01-06T13:17:54.862957615+01:00"
     description: A Helm chart for installing Directus on Kubernetes
     digest: 033619d2ec8abe9e887d6f8910cf5328b2c127f5212778548b9f48eebe8318d7
     name: directus
@@ -57,7 +57,7 @@ entries:
   dragonfly:
   - apiVersion: v2
     appVersion: v1.6.2
-    created: "2024-12-06T19:46:23.03157496+01:00"
+    created: "2025-01-06T13:17:54.865894405+01:00"
     description: Dragonfly is a modern in-memory datastore, fully compatible with
       Redis and Memcached APIs.
     digest: 26b4bf092a05c729efbfed9b0188a1c7aee18af994ce5c450fc46042e31bbbff
@@ -77,7 +77,7 @@ entries:
   dragonfly-operator:
   - apiVersion: v2
     appVersion: v1.1.8
-    created: "2024-12-06T19:46:23.030873693+01:00"
+    created: "2025-01-06T13:17:54.865016322+01:00"
     description: A Helm chart for dragonfly-operator
     digest: 64bf37612a20362590b0bbdbf0dfc573a67eb3f405a74f78a36c386f3bf636b4
     name: dragonfly-operator
@@ -87,7 +87,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: v1.1.2
-    created: "2024-12-06T19:46:23.029557683+01:00"
+    created: "2025-01-06T13:17:54.863739145+01:00"
     description: A Helm chart for dragonfly-operator
     digest: 91db04dca1597d6d4c529929b5a3dffff2e037545794e89f7a7fd7321b51e195
     name: dragonfly-operator
@@ -98,7 +98,29 @@ entries:
   invoiceninja:
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-12-06T19:46:23.046484303+01:00"
+    created: "2025-01-06T13:17:54.88018581+01:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: A Helm chart for Kubernetes
+    digest: ab58987263cc554e123ebe5c91546ee1cd19866f8190ae09d3b255ee754c5586
+    home: https://invoiceninja.github.io/dockerfiles
+    keywords:
+    - invoiceninja
+    name: invoiceninja
+    sources:
+    - https://github.com/invoiceninja/invoiceninja
+    - https://github.com/invoiceninja/dockerfiles
+    type: application
+    urls:
+    - invoiceninja-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 5.6.24
+    created: "2025-01-06T13:17:54.878101078+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -120,7 +142,7 @@ entries:
     version: 1.0.0
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-12-06T19:46:23.043602849+01:00"
+    created: "2025-01-06T13:17:54.87604818+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -142,7 +164,7 @@ entries:
     version: 0.10.5
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-12-06T19:46:23.040599059+01:00"
+    created: "2025-01-06T13:17:54.874061216+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -164,7 +186,7 @@ entries:
     version: 0.10.4
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-12-06T19:46:23.038376428+01:00"
+    created: "2025-01-06T13:17:54.871629021+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -186,7 +208,7 @@ entries:
     version: 0.10.3
   - apiVersion: v2
     appVersion: 5.6.24
-    created: "2024-12-06T19:46:23.036118492+01:00"
+    created: "2025-01-06T13:17:54.868031352+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -209,7 +231,7 @@ entries:
   mixpost:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-12-06T19:46:23.04752659+01:00"
+    created: "2025-01-06T13:17:54.881209486+01:00"
     description: A Helm chart for Kubernetes
     digest: caa5332a06435de04cd0ef9000b68bd7bc04c1309e17c186cec1cfc534558c75
     name: mixpost
@@ -219,7 +241,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-12-06T19:46:23.046814154+01:00"
+    created: "2025-01-06T13:17:54.880657984+01:00"
     description: A Helm chart for Kubernetes
     digest: 58b5f4484d24329144696dc61326ae78d4af57c69098cded433e005f4af1c6c2
     name: mixpost
@@ -242,7 +264,7 @@ entries:
         PR\"\n      url: https://github.com/8gears/n8n-helm-chart/pull/46\n"
     apiVersion: v2
     appVersion: 1.7.1
-    created: "2024-12-06T19:46:23.053683802+01:00"
+    created: "2025-01-06T13:17:54.891266794+01:00"
     dependencies:
     - condition: redis.enabled
       name: redis
@@ -274,7 +296,7 @@ entries:
   penpot:
   - apiVersion: v2
     appVersion: 1.19.2
-    created: "2024-12-06T19:46:23.05440943+01:00"
+    created: "2025-01-06T13:17:54.892623668+01:00"
     description: A Helm chart for Kubernetes
     digest: 62c50b50435e948256a8356ac3ff5afefbb339a6029b932b47b8c34726ea46f1
     name: penpot
@@ -285,7 +307,7 @@ entries:
   plausible-analytics:
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2024-12-06T19:46:23.054998652+01:00"
+    created: "2025-01-06T13:17:54.893569982+01:00"
     description: A Helm Chart for Plausible Analytics - a simple and privacy-friendly
       alternative to Google Analytics
     digest: 34a10cc86f59d4678d3be225dd4c35a6386b804138fa9bb3de5b51a46f8dc81d
@@ -307,4 +329,4 @@ entries:
     urls:
     - plausible-analytics-0.2.5.tgz
     version: 0.2.5
-generated: "2024-12-06T19:46:23.016485169+01:00"
+generated: "2025-01-06T13:17:54.849841708+01:00"
